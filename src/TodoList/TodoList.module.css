@@ -1,0 +1,15 @@
+section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+h5 {
+    color: var(--dark);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.7rem;
+}
+li {
+    margin: 1rem 0;
+}

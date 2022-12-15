@@ -1,0 +1,30 @@
+.createTodoItem {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.createTodoItem input[type="submit"] {
+    display: block;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    background-color: #ea40a4;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 4px rgba(234, 64, 164, 0.75);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border: none;
+}
+.createTodoItem input[type="submit"]:hover {
+    opacity: 0.75;
+}
+
+h2 {
+    color: var(--dark);
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 0.9rem;
+}
