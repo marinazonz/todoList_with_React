@@ -8,7 +8,6 @@ import classes from "./Form.module.css";
 const Form = (props) => {
     const [newItemName, setNewItemName] = useState("");
     const [choosedCategory, setChoosedCategory] = useState();
-    const [checked, setChecked] = useState(false);
 
     //taking the name of new item todo
     const newItemNameHandler = (name) => {
@@ -18,7 +17,6 @@ const Form = (props) => {
     //taking the category of new item todo
     const selectingCategoryHandler = (category) => {
         setChoosedCategory(category.target.value);
-        setChecked(true);
     };
 
     const submitHandler = (event) => {
@@ -32,13 +30,7 @@ const Form = (props) => {
         props.onAddNewItem(newItemName, choosedCategory);
 
         setNewItemName("");
-
-        //check it, doesnt work\/
-        //setChoosedCategory(event.target.reset());
-        //this works but lame
-        setChecked(false);
-
-        console.log(checked);
+        setChoosedCategory(event.target.reset());
     };
 
     return (
@@ -50,10 +42,7 @@ const Form = (props) => {
                         value={newItemName}
                         onChange={newItemNameHandler}
                     />
-                    <NewItemCategory
-                        onClick={selectingCategoryHandler}
-                        checked={checked}
-                    />
+                    <NewItemCategory onClick={selectingCategoryHandler} />
                     <input type='submit' value='Add ToDo' />
                 </form>
             </section>

@@ -14,7 +14,7 @@ const TodoList = (props) => {
                             id={item.id}
                             category={item.category}
                             title={item.title}
-                            onEdit={props.onEditItem}
+                            onSave={props.onSaveItem}
                             onDelete={props.onDeleteItem}
                         />
                     ))}

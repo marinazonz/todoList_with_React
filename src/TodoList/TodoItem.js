@@ -3,17 +3,17 @@ import { useState } from "react";
 import classes from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
-    //use redux for delete/edit btns, change later, one day
-
-    const [canNotChangeText, setCanNotChangeText] = useState(true);
+    const [name, setName] = useState(props.title);
+    const [isEditing, setIsEditing] = useState(false);
 
     const editHandler = () => {
-        props.onEdit(props.id);
-        setCanNotChangeText(false);
+        props.onSave(props.id, props.title);
+        setIsEditing(true);
     };
 
-    const onBlurHandler = () => {
-        setCanNotChangeText(true);
+    const onBlurHandler = (event) => {
+        setName(event.target.value);
+        setIsEditing(false);
     };
 
     const deleteHandler = () => {
@@ -31,9 +31,9 @@ const TodoItem = (props) => {
             <div className={classes.todoContent}>
                 <input
                     type='text'
-                    value={props.title}
-                    readOnly={canNotChangeText}
+                    defaultValue={name}
                     onBlur={onBlurHandler}
+                    readOnly={!isEditing}
                 />
             </div>
             <div className={classes.actions}>

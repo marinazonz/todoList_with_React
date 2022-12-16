@@ -12,7 +12,6 @@ const NewItemCategory = (props) => {
                         type='radio'
                         name='category'
                         value='business'
-                        checked={props.checked}
                         onChange={props.onClick}
                     />
                     <span
@@ -25,7 +24,6 @@ const NewItemCategory = (props) => {
                         type='radio'
                         name='category'
                         value='personal'
-                        checked={props.checked}
                         onChange={props.onClick}
                     />
                     <span

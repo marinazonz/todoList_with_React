@@ -10,7 +10,7 @@ const dummy_data = [
     {
         title: "eat",
         category: "personal",
-        id: "32mdvkr",
+        id: "32mdvk",
     },
     {
         title: "pray",
@@ -29,16 +29,29 @@ const App = (props) => {
     const [itemList, setItemList] = useState(dummy_data);
 
     const onAddNewItemHandler = (name, category) => {
-        setItemList([
-            { title: name, category: category, id: Math.random().toString() },
-            ...itemList,
-        ]);
+        const id = Math.random().toString();
+        setItemList([{ title: name, category: category, id: id }, ...itemList]);
+
+        localStorage.setItem(id, JSON.stringify(name));
     };
 
-    const editItemHandler = (id) => {
-        // setItemList((prevList) => {
-        //     const updatedList = prevList.filter((item) => item.id !== id);
-        // });
+    const editItemHandler = (idItem, title) => {
+        itemList.map((item) => {
+            console.log(idItem, item.id);
+            if (idItem === item.id) {
+                setItemList([
+                    {
+                        id: idItem,
+                        title: title,
+                        category: item.category,
+                    },
+                    ...itemList,
+                ]);
+                localStorage.setItem(itemList.id, JSON.stringify(title));
+
+                console.log(itemList);
+            }
+        });
     };
 
     const deleteItemHandler = (id) => {
@@ -64,8 +77,8 @@ const App = (props) => {
         contentList = (
             <TodoList
                 items={itemList}
-                onEditItem={editItemHandler}
                 onDeleteItem={deleteItemHandler}
+                onSaveItem={editItemHandler}
             />
         );
     }
