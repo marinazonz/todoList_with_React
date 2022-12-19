@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import classes from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
-    const [name, setName] = useState(props.title);
+    const [newTitle, setnewTitle] = useState(props.title);
     const [isEditing, setIsEditing] = useState(false);
 
     const editHandler = () => {
-        props.onSave(props.id, props.title);
         setIsEditing(true);
     };
 
     const onBlurHandler = (event) => {
-        setName(event.target.value);
+        setnewTitle(event.target.value);
         setIsEditing(false);
     };
+
+    useEffect(() => {
+        props.onSave({ idItem: props.id, newTitle: newTitle });
+    }, [newTitle]);
 
     const deleteHandler = () => {
         props.onDelete(props.id);
@@ -31,7 +34,7 @@ const TodoItem = (props) => {
             <div className={classes.todoContent}>
                 <input
                     type='text'
-                    defaultValue={name}
+                    defaultValue={newTitle}
                     onBlur={onBlurHandler}
                     readOnly={!isEditing}
                 />

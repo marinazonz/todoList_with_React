@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "./Header/Header";
 import Form from "./AddNewTodoItem/Form";
@@ -6,51 +6,27 @@ import TodoList from "./TodoList/TodoList";
 
 import "./App.css";
 
-const dummy_data = [
-    {
-        title: "eat",
-        category: "personal",
-        id: "32mdvk",
-    },
-    {
-        title: "pray",
-        category: "business",
-        id: "32mder",
-    },
-    {
-        title: "love",
-        category: "personal",
-        id: "32md",
-    },
-];
-
 const App = (props) => {
-    //const [itemList, setItemList] = useState([]);
-    const [itemList, setItemList] = useState(dummy_data);
+    const [itemList, setItemList] = useState(
+        JSON.parse(localStorage.getItem("todoList")) || []
+    );
 
     const onAddNewItemHandler = (name, category) => {
         const id = Math.random().toString();
         setItemList([{ title: name, category: category, id: id }, ...itemList]);
-
-        localStorage.setItem(id, JSON.stringify(name));
     };
 
-    const editItemHandler = (idItem, title) => {
-        itemList.map((item) => {
-            console.log(idItem, item.id);
-            if (idItem === item.id) {
-                setItemList([
-                    {
-                        id: idItem,
-                        title: title,
-                        category: item.category,
-                    },
-                    ...itemList,
-                ]);
-                localStorage.setItem(itemList.id, JSON.stringify(title));
-
-                console.log(itemList);
-            }
+    const editItemHandler = ({ idItem, newTitle }) => {
+        setItemList((prevList) => {
+            prevList.map((item, index) => {
+                if (idItem === item.id) {
+                    prevList[index]["title"] = newTitle;
+                    console.log(newTitle);
+                }
+                //return prevList;
+            });
+            console.log(prevList);
+            return [...prevList];
         });
     };
 
@@ -60,6 +36,13 @@ const App = (props) => {
         });
     };
 
+    //save the new todo List
+    useEffect(() => {
+        console.log("yolo updatin the listjhgvouvg");
+        localStorage.setItem("todoList", JSON.stringify(itemList));
+    }, [itemList]);
+
+    //render todo List
     let contentList = (
         <p
             style={{
