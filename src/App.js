@@ -28,6 +28,7 @@ const App = (props) => {
             console.log(prevList);
             return [...prevList];
         });
+        // Small change
     };
 
     const deleteItemHandler = (id) => {
