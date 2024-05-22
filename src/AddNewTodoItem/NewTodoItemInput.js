@@ -2,7 +2,7 @@ import React from "react";
 
 import "./NewTodoItemInput.module.css";
 
-const NewTodoItemInput = (props) => {
+const NewTodoItemInput = ({ value, onChange }) => {
     return (
         <>
             <h3>What's on your ToDo List?</h3>
@@ -10,8 +10,8 @@ const NewTodoItemInput = (props) => {
                 type='text'
                 name='todoInput'
                 placeholder='e.g. Make pizza dough'
-                value={props.value}
-                onChange={props.onChange}
+                value={value}
+                onChange={onChange}
             />
         </>
     );

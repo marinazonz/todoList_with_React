@@ -1,6 +1,6 @@
 import classes from "./NewItemCategory.module.css";
 
-const NewItemCategory = (props) => {
+const NewItemCategory = ({ onChange }) => {
     return (
         <>
             <div className={classes.title}>
@@ -12,7 +12,7 @@ const NewItemCategory = (props) => {
                         type='radio'
                         name='category'
                         value='business'
-                        onChange={props.onClick}
+                        onChange={onChange}
                     />
                     <span
                         className={`${classes.bubble} ${classes.business}`}
@@ -24,7 +24,7 @@ const NewItemCategory = (props) => {
                         type='radio'
                         name='category'
                         value='personal'
-                        onChange={props.onClick}
+                        onChange={onChange}
                     />
                     <span
                         className={`${classes.bubble} ${classes.personal}`}

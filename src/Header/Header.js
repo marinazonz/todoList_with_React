@@ -8,16 +8,15 @@ const hour = date.getHours();
 const Header = () => {
     const userNameInput = useRef();
     const [userName, setUserName] = useState(
-        JSON.parse(localStorage.getItem("name")) || ""
+        localStorage.getItem("name") || ""
     );
 
     const nameChangeHandler = () => {
         const enteredUserName = userNameInput.current.value;
 
-        localStorage.setItem("name", JSON.stringify(enteredUserName));
+        localStorage.setItem("name", enteredUserName);
 
         setUserName(enteredUserName);
-        console.log(userName);
     };
 
     return (

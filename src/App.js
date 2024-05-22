@@ -6,40 +6,34 @@ import TodoList from "./TodoList/TodoList";
 
 import "./App.css";
 
-const App = (props) => {
+const App = () => {
     const [itemList, setItemList] = useState(
         JSON.parse(localStorage.getItem("todoList")) || []
     );
 
+    //creating item to save in the localStorage
     const onAddNewItemHandler = (name, category) => {
         const id = Math.random().toString();
         setItemList([{ title: name, category: category, id: id }, ...itemList]);
     };
 
-    const editItemHandler = ({ idItem, newTitle }) => {
-        setItemList((prevList) => {
-            prevList.map((item, index) => {
-                if (idItem === item.id) {
-                    prevList[index]["title"] = newTitle;
-                    console.log(newTitle);
+    const onUpdateItemHandler = ({ itemId, newTitle }) => {
+        setItemList((prevList) =>
+            prevList.map((item) => {
+                if (itemId === item.id) {
+                    item.title = newTitle;
                 }
-                //return prevList;
-            });
-            console.log(prevList);
-            return [...prevList];
-        });
-        // Small change
+                return item;
+            })
+        );
     };
 
-    const deleteItemHandler = (id) => {
-        setItemList((prevList) => {
-            return prevList.filter((item) => item.id !== id);
-        });
+    const onDeleteItemHandler = (id) => {
+        setItemList((prevList) => prevList.filter((item) => item.id !== id));
     };
 
     //save the new todo List
     useEffect(() => {
-        console.log("yolo updatin the listjhgvouvg");
         localStorage.setItem("todoList", JSON.stringify(itemList));
     }, [itemList]);
 
@@ -61,8 +55,8 @@ const App = (props) => {
         contentList = (
             <TodoList
                 items={itemList}
-                onDeleteItem={deleteItemHandler}
-                onSaveItem={editItemHandler}
+                onDeleteItem={onDeleteItemHandler}
+                onSaveItem={onUpdateItemHandler}
             />
         );
     }

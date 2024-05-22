@@ -5,18 +5,18 @@ import NewItemCategory from "./NewItemCategory";
 
 import classes from "./Form.module.css";
 
-const Form = (props) => {
+const Form = ({ onAddNewItem }) => {
     const [newItemName, setNewItemName] = useState("");
-    const [choosedCategory, setChoosedCategory] = useState();
+    const [newItemCategory, setNewItemCategory] = useState();
 
-    //taking the name of new item todo
+    //taking the name of new item
     const newItemNameHandler = (name) => {
         setNewItemName(name.target.value);
     };
 
     //taking the category of new item todo
     const selectingCategoryHandler = (category) => {
-        setChoosedCategory(category.target.value);
+        setNewItemCategory(category.target.value);
     };
 
     const submitHandler = (event) => {
@@ -24,13 +24,13 @@ const Form = (props) => {
 
         //check if the input is smth (not just empty)
         if (newItemName.trim().length === 0) {
-            return alert("The iteam is empty");
+            return alert("The item is empty");
         }
 
-        props.onAddNewItem(newItemName, choosedCategory);
+        onAddNewItem(newItemName, newItemCategory);
 
         setNewItemName("");
-        setChoosedCategory(event.target.reset());
+        setNewItemCategory(event.target.reset());
     };
 
     return (
@@ -42,7 +42,7 @@ const Form = (props) => {
                         value={newItemName}
                         onChange={newItemNameHandler}
                     />
-                    <NewItemCategory onClick={selectingCategoryHandler} />
+                    <NewItemCategory onChange={selectingCategoryHandler} />
                     <input type='submit' value='Add ToDo' />
                 </form>
             </section>

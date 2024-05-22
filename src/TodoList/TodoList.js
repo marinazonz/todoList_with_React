@@ -2,20 +2,20 @@ import TodoItem from "./TodoItem";
 
 import classes from "./TodoList.module.css";
 
-const TodoList = (props) => {
+const TodoList = ({ items, onSaveItem, onDeleteItem }) => {
     return (
         <>
             <section className={classes.todoList}>
                 <h5>TODO List</h5>
                 <ul>
-                    {props.items.map((item) => (
+                    {items.map((item) => (
                         <TodoItem
                             key={item.id}
                             id={item.id}
                             category={item.category}
                             title={item.title}
-                            onSave={props.onSaveItem}
-                            onDelete={props.onDeleteItem}
+                            onSave={onSaveItem}
+                            onDelete={onDeleteItem}
                         />
                     ))}
                 </ul>

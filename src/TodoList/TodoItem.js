@@ -2,13 +2,9 @@ import { useState, useEffect } from "react";
 
 import classes from "./TodoItem.module.css";
 
-const TodoItem = (props) => {
-    const [newTitle, setnewTitle] = useState(props.title);
+const TodoItem = ({ title, id, onSave, onDelete }) => {
+    const [newTitle, setnewTitle] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
-
-    const editHandler = () => {
-        setIsEditing(true);
-    };
 
     const onBlurHandler = (event) => {
         setnewTitle(event.target.value);
@@ -16,12 +12,8 @@ const TodoItem = (props) => {
     };
 
     useEffect(() => {
-        props.onSave({ idItem: props.id, newTitle: newTitle });
-    }, [newTitle]);
-
-    const deleteHandler = () => {
-        props.onDelete(props.id);
-    };
+        onSave({ idItem: id, newTitle: newTitle });
+    }, [id, newTitle, onSave]);
 
     return (
         <li className={classes.todoItem}>
@@ -40,10 +32,13 @@ const TodoItem = (props) => {
                 />
             </div>
             <div className={classes.actions}>
-                <button className={classes.edit} onClick={editHandler}>
+                <button
+                    className={classes.edit}
+                    onClick={() => setIsEditing(true)}
+                >
                     Edit
                 </button>
-                <button className={classes.delete} onClick={deleteHandler}>
+                <button className={classes.delete} onClick={() => onDelete(id)}>
                     Delete
                 </button>
             </div>
